@@ -5,12 +5,14 @@
     android:background="#000"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+             android:elevation="30dp"
 
     >
     <RelativeLayout
         android:id="@+id/view_wrapper"
     	android:layout_width="250dp"
 		android:layout_height="180dp"
+        android:elevation="30dp"
     >
     <com.devbrackets.android.exomedia.ui.widget.VideoView
 		android:id="@+id/videoView"
@@ -59,7 +61,7 @@
 
             android:id="@+id/app_video_bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:visibility="visible">
 
@@ -71,7 +73,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@null"
-                android:onClick="willReturnToApp"
+                android:onClick="returnToApp"
                 android:src="@drawable/ic_open_app" />
 
 
@@ -94,7 +96,7 @@
 
             android:id="@+id/app_video_bottom_box"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="8dp"
             android:visibility="visible">
@@ -162,7 +164,7 @@
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:layout_above="@+id/app_video_bottom_box">
-          
+
         </LinearLayout>
     </RelativeLayout>
 
