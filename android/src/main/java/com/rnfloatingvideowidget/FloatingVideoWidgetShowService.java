@@ -131,8 +131,13 @@ public class FloatingVideoWidgetShowService extends Service {
                     videoView.setKeepScreenOn(true);
                     final float scale = reactContext.getResources().getDisplayMetrics().density;
                     //Resize the floating window
-                    int videoWidth = Integer.parseInt(playingVideo.getString("width"));
-                    int videoHeight = Integer.parseInt(playingVideo.getString("height"));
+                    int videoWidth = 250;
+                    int videoHeight = 180;
+                    if (playingVideo.getString("width") != "null" || playingVideo.getString("height") != "null") {
+                    videoWidth = Integer.parseInt(playingVideo.getString("width"));
+                    videoHeight = Integer.parseInt(playingVideo.getString("height"));
+                    }
+                  
                     double aspectRatio = (double) videoWidth / (double) videoHeight;
                     RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
                     if (videoHeight > videoWidth) {
@@ -194,6 +199,23 @@ public class FloatingVideoWidgetShowService extends Service {
         decreaseSize = (ImageButton) floatingWindow.findViewById(R.id.decrease_size);
         playVideo = (ImageButton) floatingWindow.findViewById(R.id.app_video_play);
         pauseVideo = (ImageButton) floatingWindow.findViewById(R.id.app_video_pause);
+
+
+        videoView.setOnErrorListener(new OnErrorListener() {
+            @Override
+            public boolean onError(Exception e) {
+                WritableMap args = new Arguments().createMap();
+                args.putInt("index", index);
+                args.putInt("seek", (int) seek);
+                args.putString("videoURL", playingVideo.getString("videoURL"));
+                args.putString("type", "error");
+                //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+                sendEvent(reactContext, "onError", args);
+
+                Toast.makeText(reactContext, "An Error occured, please try again", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
 
         floatingWindow.findViewById(R.id.app_video_crop).setOnClickListener(new View.OnClickListener() {
 
