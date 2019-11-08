@@ -97,7 +97,7 @@ public class FloatingVideoWidgetShowService extends Service {
                     args.putInt("index", index);
                     args.putInt("seek", (int) seek);
                     args.putString("type", "close");
-                    Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
                     sendEvent(reactContext, "onClose", args);
                     break;
                 }
@@ -138,7 +138,7 @@ public class FloatingVideoWidgetShowService extends Service {
                     if (videoHeight > videoWidth) {
                         int height = (int) (200 * scale + 0.5f);
                         double width = height * aspectRatio;
-                        Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
                         relativeLayout.getLayoutParams().width = (int) width;
                         relativeLayout.getLayoutParams().height = height;
 
@@ -168,8 +168,16 @@ public class FloatingVideoWidgetShowService extends Service {
         gestureDetector = new GestureDetector(this, new SingleTapConfirm());
         reactContext = getReactContext;
         floatingWindow = LayoutInflater.from(this).inflate(R.layout.floating_widget_layout, null);
+
+         int LAYOUT_FLAG;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
         params = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                WindowManager.LayoutParams.WRAP_CONTENT, LAYOUT_FLAG,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
 
 
@@ -200,7 +208,7 @@ public class FloatingVideoWidgetShowService extends Service {
                 args.putInt("seek", (int) seek);
                 args.putString("url", playingVideo.getString("url"));
                 args.putString("type", "close");
-                Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
                 sendEvent(reactContext, "onClose", args);
             }
         });
@@ -297,7 +305,7 @@ public class FloatingVideoWidgetShowService extends Service {
         if (videoHeight > videoWidth) {
             int height = (int) (400 * scale + 0.5f);
             double width = height * aspectRatio;
-            Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+            //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
             relativeLayout.getLayoutParams().width = (int) width;
             relativeLayout.getLayoutParams().height = height;
 
@@ -325,7 +333,7 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putInt("seek", (int) seek);
         args.putString("type", "close");
         args.putString("url", playingVideo.getString("url"));
-        Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
         sendEvent(reactContext, "onClose", args);
     }
 
@@ -341,7 +349,7 @@ public class FloatingVideoWidgetShowService extends Service {
         if (videoHeight > videoWidth) {
             int height = (int) (200 * scale + 0.5f);
             double width = height * aspectRatio;
-            Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+            //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
             relativeLayout.getLayoutParams().width = (int) width;
             relativeLayout.getLayoutParams().height = height;
 
