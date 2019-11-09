@@ -60,11 +60,13 @@ All event listeners should have a callback function as an argument to handle the
 |onError|Called when an error occurred| `{type:"close",seek,index,url}`
 
 Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount.
-#
+
 ## Todo List
  - [ ] Improve native code quality
  - [ ] Complete error handling
  - [ ] Use ExoPlayer w/o ExoMedia Library
+ 
+ #
 
 ### Thanks to developers of following libraries
 
