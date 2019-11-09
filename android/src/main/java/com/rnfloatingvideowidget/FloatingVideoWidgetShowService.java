@@ -137,7 +137,7 @@ public class FloatingVideoWidgetShowService extends Service {
                     videoWidth = Integer.parseInt(playingVideo.getString("width"));
                     videoHeight = Integer.parseInt(playingVideo.getString("height"));
                     }
-                  
+
                     double aspectRatio = (double) videoWidth / (double) videoHeight;
                     RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
                     if (videoHeight > videoWidth) {
@@ -204,6 +204,7 @@ public class FloatingVideoWidgetShowService extends Service {
         videoView.setOnErrorListener(new OnErrorListener() {
             @Override
             public boolean onError(Exception e) {
+                long seek = videoView.getCurrentPosition();
                 WritableMap args = new Arguments().createMap();
                 args.putInt("index", index);
                 args.putInt("seek", (int) seek);
