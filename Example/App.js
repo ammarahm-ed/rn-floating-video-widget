@@ -14,7 +14,7 @@ import FloatingVideo from 'rn-float-video-widget';
 const data = {
   video: {
     uri:
-      'http://mirrors.standaloneinstaller.com/video-sample/star_trails.mkv'
+        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
   }
 };
 
@@ -41,7 +41,6 @@ export default class App extends React.Component {
             }}
           />
         </View>
-
       </View>
     );
   }
