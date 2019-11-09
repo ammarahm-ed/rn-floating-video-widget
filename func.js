@@ -23,6 +23,11 @@ export function open(data) {
 export function close() {
     Widget.close();
 }
+
+export async function requestOverlayPermission() {
+   return await Widget.requestOverlayPermission();
+}
+
 export function play() {
     Widget.play();
 }
