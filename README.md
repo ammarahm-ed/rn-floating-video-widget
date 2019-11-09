@@ -45,3 +45,4 @@ All event listeners should have a callback function as an argument to handle the
 |onClose|floating video player has closed| `{type:"close",seek,index,url}`
 |onError|Called when an error occured| `{type:"close",seek,index,url}`
 
+Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount.
