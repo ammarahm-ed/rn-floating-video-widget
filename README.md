@@ -57,7 +57,7 @@ All event listeners should have a callback function as an argument to handle the
 |onNext|next video is playing| `{type:"next",seek,index,url}`
 |onPrev|previous video is playing| `{type:"prev",seek,index,url}`
 |onClose|floating video player has closed| `{type:"close",seek,index,url}`
-|onError|Called when an error occurred| `{type:"close",seek,index,url}`
+|onError|Called when an error occurred| `{type:"error",seek,index,url}`
 
 Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount.
 #
