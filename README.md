@@ -46,3 +46,17 @@ All event listeners should have a callback function as an argument to handle the
 |onError|Called when an error occured| `{type:"close",seek,index,url}`
 
 Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount.
+
+### Thanks to developers of following libraries
+
+ - [react-native-float-widget](https://github.com/thebylito/react-native-float-widget)
+ - [react-native-draw-overlays](https://github.com/MaxToyberman/react-native-draw-overlays)
+
+### Dependencies
+
+ -  [ExoMedia Library Apache 2.0 Licence](https://github.com/brianwernick/ExoMedia)
+ - [ExoPlayer Library Apache 2.0 Licence](https://github.com/google/ExoPlayer)
+ 
+ #
+
+### MIT Licensed
