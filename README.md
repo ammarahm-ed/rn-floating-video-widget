@@ -6,7 +6,7 @@ React Native Module for **Floating/Popup** video player on Android.
 
 ## Installation
 
-    npm install rn-floating-video-Widget --save
+    npm install rn-floating-video-widget --save
 or if you use yarn:
 
     yarn add rn-floating-video-widget
