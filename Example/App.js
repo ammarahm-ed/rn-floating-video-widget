@@ -21,17 +21,13 @@ const data = {
 export default class App extends React.Component {
   componentDidMount() {
     FloatingVideo.onClose(data => console.log(data));
-  
-   
   }
 
   render() {
     return (
       <View style={styles.container}>
-        
-      
         <Button
-          title="hide Widget"
+          title="Close Player"
           onPress={() => {
             FloatingVideo.Widget.close();
           }}
