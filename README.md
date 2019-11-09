@@ -1,4 +1,4 @@
-# RN-Floating-Video-Widget
+# rn-floating-video-widget
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)
 
