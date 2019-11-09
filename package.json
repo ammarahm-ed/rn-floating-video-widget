@@ -1,8 +1,8 @@
 {
   "name": "rn-floating-video-widget",
-  "title": "React Native Floating Video Widget",
+  "title": "rn-floating-video-widget",
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "React Native Module for Floating/Popup video player on Android.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,11 +13,11 @@
     "baseUrl": "https://github.com/github_account/react-native-floating-video-widget"
   },
   "keywords": [
-    "react-native"
+    "react-native, rn-floating-video-player, javascript, video, floating,"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Ammar Ahmed",
+    "email": "ammarahmed6506@gmail.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
