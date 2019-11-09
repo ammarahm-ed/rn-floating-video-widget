@@ -1,13 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
-import {StyleSheet, View, Text, TextInput, Button} from 'react-native';
+import {StyleSheet, View, Button} from 'react-native';
 
 import FloatingVideo from 'rn-float-video-widget';
 
