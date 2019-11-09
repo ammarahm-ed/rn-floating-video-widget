@@ -35,11 +35,13 @@ FloatingVideo API has been kept very simple and practical in use.
 
 ### Event Listeners
 All event listeners should have a callback function as an argument to handle the event.
+
 |Name|Description|Data recieved from event
 |--|--|--|
-| onOpen |video is playing | `{type:"play",seek,index,url}`
-| onPause|video is paused| `{type:"pause",seek,index,url}` 
+|onOpen|video is playing| `{type:"play",seek,index,url}`
+|onPause|video is paused| `{type:"pause",seek,index,url}` 
 |onNext|next video is playing| `{type:"next",seek,index,url}`
 |onPrev|previous video is playing| `{type:"prev",seek,index,url}`
 |onClose|floating video player has closed| `{type:"close",seek,index,url}`
 |onError|Called when an error occured| `{type:"close",seek,index,url}`
+
