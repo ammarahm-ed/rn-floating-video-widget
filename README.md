@@ -1,4 +1,4 @@
-# RN-Floating-Video-Widget
+# rn-floating-video-widget
 
 React Native Module for **Floating/Popup** video player on Android.  
 
