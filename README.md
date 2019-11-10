@@ -61,7 +61,7 @@ The video data object is a single object that can have the following properties
 
 |Name|Type|Required|Description
 |--|--|--|--|
-| video |Object  | yes|A video object atlease should. have a `url` property. It can also include other properties such as `width` and `height` of the video. If `width` and `height` are provided, the floating video will maintain the aspect ratio according to video width and height. 
+| video |Object  | yes|A video object atlease should. have a `url` property.
 | videos | Array|no |Array of the above video objects
 | seek | number(ms) |no |seek video on load to this value
 | index | number | no| index of `video`object in `videos` array.
@@ -72,13 +72,13 @@ All event listeners should have a callback function as an argument to handle the
 
 |Name|Description|Data recieved from event|
 |--|--|--|
-| onOpen |floating video is open and video is playing | `{type:"play",seek,index,url}`
+| onOpen |floating video is open and video is playing | `{type:"open",seek,index,url}`
 | onPlay |video is playing | `{type:"play",seek,index,url}`
 | onPause|video is paused| `{type:"pause",seek,index,url}` 
 |onNext|next video is playing| `{type:"next",seek,index,url}`
 |onPrev|previous video is playing| `{type:"prev",seek,index,url}`
 |onClose|floating video player has closed| `{type:"close",seek,index,url}`
-|onError|Called when an error occurred| `{type:"close",seek,index,url}`
+|onError|Called when an error occurred| `{type:"error",seek,index,url}`
 
 Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount.
 
