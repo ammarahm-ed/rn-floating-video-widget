@@ -55,13 +55,13 @@ FloatingVideo API has been kept very simple and practical in use.
 |close||Close Floating video player
 |requestOverlayPermission||Ask for `draw over other apps` permission
 
-#### Video Data Object
+#### The Data Object
 The video data object is a single object that can have the following properties
 
 |Name|Type|Required|Description
 |--|--|--|--|
-| video |Object  | yes|A video object must have a `url` property
-| videos | Array|no |Array of the above video objects with a `url` property
+| video |Object  | yes|A video object atlease should. have a `url` property. It can also include other properties such as `width` and `height` of the video. If `width` and `height` are provided, the floating video will maintain the aspect ratio according to video width and height. 
+| videos | Array|no |Array of the above video objects
 | seek | number(ms) |no |seek video on load to this value
 | index | number | no| index of `video`object in `videos` array.
 
