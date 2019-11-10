@@ -33,6 +33,9 @@ export default class App extends React.Component {
           url:
             'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
         },
+          {
+              url:"http://www.exit109.com/~dnn/clips/RW20seconds_2.mp4"
+          }
       ],
       seek: 10,
       index: 0,
