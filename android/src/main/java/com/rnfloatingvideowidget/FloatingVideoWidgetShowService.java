@@ -101,7 +101,7 @@ public class FloatingVideoWidgetShowService extends Service {
                     args.putInt("index", index);
                     args.putInt("seek", (int) seek);
                     args.putString("type", "close");
-                    //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+
                     sendEvent(reactContext, "onClose", args);
                     break;
                 }
@@ -188,9 +188,9 @@ public class FloatingVideoWidgetShowService extends Service {
                 WritableMap args = new Arguments().createMap();
                 args.putInt("index", index);
                 args.putInt("seek", (int) seek);
-                args.putString("videoURL", playingVideo.getString("videoURL"));
+                args.putString("url", playingVideo.getString("url"));
                 args.putString("type", "error");
-                //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+
                 sendEvent(reactContext, "onError", args);
 
                 Toast.makeText(reactContext, "An Error occured, please try again", Toast.LENGTH_LONG).show();
@@ -211,7 +211,7 @@ public class FloatingVideoWidgetShowService extends Service {
                 if (videoHeight > videoWidth) {
                     int height = (int) (200 * scale + 0.5f);
                     double width = height * aspectRatio;
-                    //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+
                     relativeLayout.getLayoutParams().width = (int) width;
                     relativeLayout.getLayoutParams().height = height;
 
@@ -223,7 +223,7 @@ public class FloatingVideoWidgetShowService extends Service {
 
                 }
 
-                //Toast.makeText(reactContext,String.valueOf(intrinsicWidth), Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -240,7 +240,7 @@ public class FloatingVideoWidgetShowService extends Service {
                 args.putInt("seek", (int) seek);
                 args.putString("url", playingVideo.getString("url"));
                 args.putString("type", "close");
-                //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+
                 sendEvent(reactContext, "onClose", args);
                 onDestroy();
             }
@@ -335,7 +335,7 @@ public class FloatingVideoWidgetShowService extends Service {
         if (videoHeight > videoWidth) {
             int height = (int) (400 * scale + 0.5f);
             double width = height * aspectRatio;
-            //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+
             relativeLayout.getLayoutParams().width = (int) width;
             relativeLayout.getLayoutParams().height = height;
 
@@ -363,7 +363,7 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putInt("seek", (int) seek);
         args.putString("type", "close");
         args.putString("url", playingVideo.getString("url"));
-        //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
+
         sendEvent(reactContext, "onClose", args);
         onDestroy();
     }
@@ -377,7 +377,7 @@ public class FloatingVideoWidgetShowService extends Service {
         if (videoHeight > videoWidth) {
             int height = (int) (200 * scale + 0.5f);
             double width = height * aspectRatio;
-            //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+
             relativeLayout.getLayoutParams().width = (int) width;
             relativeLayout.getLayoutParams().height = height;
 
