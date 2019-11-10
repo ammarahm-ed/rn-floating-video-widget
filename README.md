@@ -2,9 +2,8 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)
 [![PRs Welcome](https://img.shields.io/npm/v/rn-floating-video-widget?color=green)](https://img.shields.io/npm/v/rn-floating-video-widget?color=green)
 
+React Native Module for **Floating/Popup** video player on Android. From android 8.0 Oreo onwards we have `PictureInPicture` mode built into android which is great but even today there are many devices below that. This library helps you with that issue if you are making a video application.
 
-
-React Native Module for **Floating/Popup** video player on Android.  
 <img src="https://github.com/ammarahm-ed/rn-floating-video-widget/blob/master/Screenshots/1.png" width="300" >
 <img src="https://github.com/ammarahm-ed/rn-floating-video-widget/blob/master/Screenshots/2.png" width="300" >
 ## Run the Example
