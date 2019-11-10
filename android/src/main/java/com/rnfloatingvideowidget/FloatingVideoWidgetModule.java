@@ -22,7 +22,6 @@ import com.facebook.react.bridge.ReadableNativeArray;
 import com.facebook.react.bridge.WritableMap;
 import android.app.Activity;
 import android.provider.Settings;
-import com.facebook.react.bridge.ActivityEventListener;
 
 
 public class FloatingVideoWidgetModule extends ReactContextBaseJavaModule {
@@ -57,6 +56,8 @@ public class FloatingVideoWidgetModule extends ReactContextBaseJavaModule {
 
             }
         }
+    };
+
 
     @Override
     public String getName() {
