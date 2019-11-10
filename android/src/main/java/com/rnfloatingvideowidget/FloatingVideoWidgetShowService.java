@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 
+import com.devbrackets.android.exomedia.listener.OnVideoSizeChangedListener;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.devbrackets.android.exomedia.listener.OnErrorListener;
 import com.facebook.react.ReactApplication;
@@ -67,6 +68,8 @@ public class FloatingVideoWidgetShowService extends Service {
     private static int index = 0;
     private static ReadableMap initData = null;
     private GestureDetector gestureDetector;
+    private int videoWidth = 250;
+    private int videoHeight = 180;
 
     public FloatingVideoWidgetShowService() {
     }
@@ -131,32 +134,6 @@ public class FloatingVideoWidgetShowService extends Service {
                     videoView.start();
                     videoView.setKeepScreenOn(true);
 
-                    final float scale = reactContext.getResources().getDisplayMetrics().density;
-                    //Resize the floating window
-                    int videoWidth = 250;
-                    int videoHeight = 180;
-                    if (playingVideo.hasKey("width") && playingVideo.hasKey("height") && playingVideo.getString("width") != "null" && playingVideo.getString("height") != "null") {
-                        videoWidth = Integer.parseInt(playingVideo.getString("width"));
-                        videoHeight = Integer.parseInt(playingVideo.getString("height"));
-                    }
-
-
-                    double aspectRatio = (double) videoWidth / (double) videoHeight;
-                    RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
-                    if (videoHeight > videoWidth) {
-                        int height = (int) (200 * scale + 0.5f);
-                        double width = height * aspectRatio;
-                        //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
-                        relativeLayout.getLayoutParams().width = (int) width;
-                        relativeLayout.getLayoutParams().height = height;
-
-                    } else {
-                        int width = (int) (250 * scale + 0.5f);
-                        double height = width / aspectRatio;
-                        relativeLayout.getLayoutParams().width = width;
-                        relativeLayout.getLayoutParams().height = (int) height;
-
-                    }
                     WritableMap args = Arguments.createMap();
                     args.putString("state", "isOpened");
                     args.putString("url", playingVideo.getString("url"));
@@ -218,6 +195,39 @@ public class FloatingVideoWidgetShowService extends Service {
 
                 Toast.makeText(reactContext, "An Error occured, please try again", Toast.LENGTH_LONG).show();
                 return false;
+            }
+        });
+        videoView.setOnVideoSizedChangedListener(new OnVideoSizeChangedListener() {
+            @Override
+            public void onVideoSizeChanged(int intrinsicWidth, int intrinsicHeight, float pixelWidthHeightRatio) {
+                final float scale = reactContext.getResources().getDisplayMetrics().density;
+
+                videoWidth = intrinsicWidth;
+                videoHeight = intrinsicHeight;
+
+                RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
+                double aspectRatio = (double) videoWidth / (double) videoHeight;
+
+                if (videoHeight > videoWidth) {
+                    int height = (int) (200 * scale + 0.5f);
+                    double width = height * aspectRatio;
+                    //Toast.makeText(reactContext, String.valueOf(aspectRatio), Toast.LENGTH_LONG).show();
+                    relativeLayout.getLayoutParams().width = (int) width;
+                    relativeLayout.getLayoutParams().height = height;
+
+                } else {
+                    int width = (int) (250 * scale + 0.5f);
+                    double height = width / aspectRatio;
+                    relativeLayout.getLayoutParams().width = width;
+                    relativeLayout.getLayoutParams().height = (int) height;
+
+                }
+
+
+
+
+
+                Toast.makeText(reactContext,String.valueOf(intrinsicWidth), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -324,15 +334,6 @@ public class FloatingVideoWidgetShowService extends Service {
         display.getSize(size);
         int densityX = size.x; // default height width of screen
 
-
-        int videoWidth = 250;
-        int videoHeight = 180;
-        if (playingVideo.hasKey("width") && playingVideo.hasKey("height") && playingVideo.getString("width") != "null" && playingVideo.getString("height") != "null") {
-            videoWidth = Integer.parseInt(playingVideo.getString("width"));
-            videoHeight = Integer.parseInt(playingVideo.getString("height"));
-        }
-
-
         double aspectRatio = (double) videoWidth / (double) videoHeight;
 
         if (videoHeight > videoWidth) {
@@ -374,13 +375,6 @@ public class FloatingVideoWidgetShowService extends Service {
     public void decreaseWindowSize(View view) {
         final float scale = reactContext.getResources().getDisplayMetrics().density;
         RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
-
-        int videoWidth = 250;
-        int videoHeight = 180;
-        if (playingVideo.hasKey("width") && playingVideo.hasKey("height") && playingVideo.getString("width") != "null" && playingVideo.getString("height") != "null") {
-            videoWidth = Integer.parseInt(playingVideo.getString("width"));
-            videoHeight = Integer.parseInt(playingVideo.getString("height"));
-        }
 
         double aspectRatio = (double) videoWidth / (double) videoHeight;
 

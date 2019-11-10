@@ -35,7 +35,6 @@
       <change beforePath="$PROJECT_DIR$/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/intermediates/library_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/library_manifest/debug/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/intermediates/merged_manifests/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/merged_manifests/debug/output.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/merged_manifests/debugAndroidTest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/merged_manifests/debugAndroidTest/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/intermediates/runtime_library_classes/debug/classes.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/runtime_library_classes/debug/classes.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
@@ -60,21 +59,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="366" column="61" selection-start-line="366" selection-start-column="61" selection-end-line="366" selection-end-column="61" />
+            <state relative-caret-position="345">
+              <caret line="210" column="47" lean-forward="true" selection-start-line="210" selection-start-column="47" selection-end-line="210" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8571#9327#0" expanded="true" />
-                <element signature="e#9326#9327#0" expanded="true" />
-                <element signature="e#9407#10092#0" expanded="true" />
-                <element signature="e#10091#10092#0" expanded="true" />
-                <element signature="e#10771#10962#0" expanded="true" />
-                <element signature="e#10961#10962#0" expanded="true" />
-                <element signature="e#12250#12251#0" expanded="true" />
-                <element signature="e#12285#12286#0" expanded="true" />
+                <element signature="e#7679#8435#0" expanded="true" />
+                <element signature="e#8434#8435#0" expanded="true" />
+                <element signature="e#8487#9707#0" expanded="true" />
+                <element signature="e#9706#9707#0" expanded="true" />
+                <element signature="e#9787#10501#0" expanded="true" />
+                <element signature="e#10500#10501#0" expanded="true" />
+                <element signature="e#11180#11371#0" expanded="true" />
+                <element signature="e#11370#11371#0" expanded="true" />
+                <element signature="e#12195#12196#0" expanded="true" />
+                <element signature="e#12230#12231#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="111" column="16" lean-forward="true" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="16" />
+            <state relative-caret-position="427">
+              <caret line="112" column="16" lean-forward="true" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2463#2464#0" expanded="true" />
@@ -141,8 +142,8 @@
         <option value="$PROJECT_DIR$/../../../../android/src/main/res/layout/floating_widget_layout.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/floating_widget_layout.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetModule.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.java" />
       </list>
     </option>
   </component>
@@ -288,31 +289,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetModule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="366" column="61" selection-start-line="366" selection-start-column="61" selection-end-line="366" selection-end-column="61" />
+        <state relative-caret-position="427">
+          <caret line="112" column="16" lean-forward="true" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8571#9327#0" expanded="true" />
-            <element signature="e#9326#9327#0" expanded="true" />
-            <element signature="e#9407#10092#0" expanded="true" />
-            <element signature="e#10091#10092#0" expanded="true" />
-            <element signature="e#10771#10962#0" expanded="true" />
-            <element signature="e#10961#10962#0" expanded="true" />
-            <element signature="e#12250#12251#0" expanded="true" />
-            <element signature="e#12285#12286#0" expanded="true" />
+            <element signature="e#2463#2464#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetModule.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/rnfloatingvideowidget/FloatingVideoWidgetShowService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="111" column="16" lean-forward="true" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="16" />
+        <state relative-caret-position="345">
+          <caret line="210" column="47" lean-forward="true" selection-start-line="210" selection-start-column="47" selection-end-line="210" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2463#2464#0" expanded="true" />
+            <element signature="e#7679#8435#0" expanded="true" />
+            <element signature="e#8434#8435#0" expanded="true" />
+            <element signature="e#8487#9707#0" expanded="true" />
+            <element signature="e#9706#9707#0" expanded="true" />
+            <element signature="e#9787#10501#0" expanded="true" />
+            <element signature="e#10500#10501#0" expanded="true" />
+            <element signature="e#11180#11371#0" expanded="true" />
+            <element signature="e#11370#11371#0" expanded="true" />
+            <element signature="e#12195#12196#0" expanded="true" />
+            <element signature="e#12230#12231#0" expanded="true" />
           </folding>
         </state>
       </provider>
