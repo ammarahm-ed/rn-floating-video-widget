@@ -1,5 +1,7 @@
 # rn-floating-video-widget
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)
+[![PRs Welcome](https://img.shields.io/npm/v/rn-floating-video-widget?color=green)](https://img.shields.io/npm/v/rn-floating-video-widget?color=green)
+
 
 
 React Native Module for **Floating/Popup** video player on Android.  
