@@ -47,7 +47,8 @@ FloatingVideo API has been kept very simple and practical in use.
 ### Methods
 |Name|arguments|Description|
 |--|--|--|
-| play |A video data object(see below)  | Initialise player and play video
+|open|A data object(see below)Initialise the player and play video|
+| play || play/resume the video
 | pause| |pause the video
 |next||Play next video in playlist
 |prev||Play previous video in playlist
@@ -70,7 +71,8 @@ All event listeners should have a callback function as an argument to handle the
 
 |Name|Description|Data recieved from event|
 |--|--|--|
-| onOpen |video is playing | `{type:"play",seek,index,url}`
+| onOpen |floating video is open and video is playing | `{type:"play",seek,index,url}`
+| onPlay |video is playing | `{type:"play",seek,index,url}`
 | onPause|video is paused| `{type:"pause",seek,index,url}` 
 |onNext|next video is playing| `{type:"next",seek,index,url}`
 |onPrev|previous video is playing| `{type:"prev",seek,index,url}`
