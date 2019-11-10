@@ -1,4 +1,5 @@
 # rn-floating-video-widget
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)
 
 
 React Native Module for **Floating/Popup** video player on Android.  
@@ -86,7 +87,7 @@ Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount
 ### Thanks to developers of following libraries
 
  - [react-native-float-widget](https://github.com/thebylito/react-native-float-widget)
- - [react-native-draw-overlays](https://github.com/MaxToyberman/react-native-draw-overlays)
+ - [react-native-draw-overlays](https://github.com/MaxToyberman/react-native-draw-overlay)
 
 ### Dependencies
 
