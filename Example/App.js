@@ -8,34 +8,34 @@ import {
 } from 'react-native';
 import FloatingVideo from 'rn-floating-video-widget';
 
-const data = {
-  video: {
-    url:
-      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-  },
-  videos: [
-    {
-      url:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    },
-    {
-      url:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-    },
-    {
-      url:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-    },
-  ],
-  seek: 0,
-  index: 0,
-};
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       floating: false,
+      granted: false,
+    };
+    this.data = {
+      video: {
+        url:
+          'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      },
+      videos: [
+        {
+          url:
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        },
+        {
+          url:
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+        },
+        {
+          url:
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+        },
+      ],
+      seek: 10,
+      index: 0,
     };
   }
 
@@ -54,11 +54,15 @@ export default class App extends React.Component {
       .then(() => {
         this.setState({
           floating: true,
+          granted: true,
         });
-        FloatingVideo.open(data);
+        FloatingVideo.open(this.data);
       })
       .catch(e => {
-        ToastAndroid.show('Please grant draw over other apps permission', 800);
+        ToastAndroid.show(
+          'Please grant draw over other apps permission' + JSON.stringify(e),
+          800,
+        );
       });
   }
 

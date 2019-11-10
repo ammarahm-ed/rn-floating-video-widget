@@ -236,6 +236,7 @@ public class FloatingVideoWidgetShowService extends Service {
                 args.putString("type", "close");
                 //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
                 sendEvent(reactContext, "onClose", args);
+                onDestroy();
             }
         });
 
@@ -367,6 +368,7 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putString("url", playingVideo.getString("url"));
         //Toast.makeText(reactContext, args.toString(), Toast.LENGTH_LONG).show();
         sendEvent(reactContext, "onClose", args);
+        onDestroy();
     }
 
     public void decreaseWindowSize(View view) {

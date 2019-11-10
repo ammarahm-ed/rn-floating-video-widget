@@ -3,21 +3,23 @@ import { NativeModules,DeviceEventEmitter } from 'react-native';
 const  Widget  = NativeModules.FloatingVideoWidget;
 
 export function open(data) {
-    let dataObject = data;
+
     if (!data || typeof data !== "object") throw new Error("data must be an object with atleast one key as video object");
     if (!data.video || typeof data.video !== "object" ||!data.video.url) throw new Error("video must be an object with atleast one key 'uri: url to video");
-    if (!data.videos || data.videos.length == 0) {
+    if (!data.hasOwnProperty("videos") || data.videos.length == 0) {
         let videos = [];
-        videos.push(dataObject.video);
-        dataObject.videos = videos;
+        videos.push(data.video);
+        data.videos = videos;
     }
-    if (!data.seek) {
-        dataObject.seek = 0;
+    if (!data.hasOwnProperty("seek")) {
+        data.seek = 0;
     }
-    if (!data.index) {
-        dataObject.index = 0;
+
+    if (!data.hasOwnProperty("index")) {
+        data.index = 0;
     }
-    Widget.open(dataObject);
+    Widget.open(data);
+
 }
 
 export function close() {
