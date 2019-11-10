@@ -1,8 +1,21 @@
 # rn-floating-video-widget
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)](https://img.shields.io/badge/PRs-welcome-green?style=flat-square)
 
 React Native Module for **Floating/Popup** video player on Android.  
+
+## Run the Example
+To run the example app clone the project
+
+    git clone https://github.com/ammarahm-ed/rn-floating-video-widget.git
+
+      
+
+   then run ` yarn or npm install` in the example folder and finally to run the example app:
+       
+   
+    react-native run-android
+
+
 
 ## Installation
 
@@ -41,6 +54,8 @@ FloatingVideo API has been kept very simple and practical in use.
 |requestOverlayPermission||Ask for `draw over other apps` permission
 
 #### Video Data Object
+The video data object is a single object that can have the following properties
+
 |Name|Type|Required|Description
 |--|--|--|--|
 | video |Object  | yes|A video object must have a `url` property
@@ -67,8 +82,6 @@ Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount
  - [ ] Improve native code quality
  - [ ] Complete error handling
  - [ ] Use ExoPlayer w/o ExoMedia Library
- 
- #
 
 ### Thanks to developers of following libraries
 
