@@ -223,11 +223,7 @@ public class FloatingVideoWidgetShowService extends Service {
 
                 }
 
-
-
-
-
-                Toast.makeText(reactContext,String.valueOf(intrinsicWidth), Toast.LENGTH_LONG).show();
+                //Toast.makeText(reactContext,String.valueOf(intrinsicWidth), Toast.LENGTH_LONG).show();
             }
         });
 
