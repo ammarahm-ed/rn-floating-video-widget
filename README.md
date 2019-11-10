@@ -47,20 +47,21 @@ FloatingVideo API has been kept very simple and practical in use.
 ### Methods
 |Name|arguments|Description|
 |--|--|--|
-| play |A video data object(see below)  | Initialise player and play video
+|open|A data object(see below)Initialise the player and play video|
+| play || play/resume the video
 | pause| |pause the video
 |next||Play next video in playlist
 |prev||Play previous video in playlist
 |close||Close Floating video player
 |requestOverlayPermission||Ask for `draw over other apps` permission
 
-#### Video Data Object
+#### The Data Object
 The video data object is a single object that can have the following properties
 
 |Name|Type|Required|Description
 |--|--|--|--|
-| video |Object  | yes|A video object must have a `url` property
-| videos | Array|no |Array of the above video objects with a `url` property
+| video |Object  | yes|A video object atlease should. have a `url` property. It can also include other properties such as `width` and `height` of the video. If `width` and `height` are provided, the floating video will maintain the aspect ratio according to video width and height. 
+| videos | Array|no |Array of the above video objects
 | seek | number(ms) |no |seek video on load to this value
 | index | number | no| index of `video`object in `videos` array.
 
@@ -70,7 +71,8 @@ All event listeners should have a callback function as an argument to handle the
 
 |Name|Description|Data recieved from event|
 |--|--|--|
-| onOpen |video is playing | `{type:"play",seek,index,url}`
+| onOpen |floating video is open and video is playing | `{type:"play",seek,index,url}`
+| onPlay |video is playing | `{type:"play",seek,index,url}`
 | onPause|video is paused| `{type:"pause",seek,index,url}` 
 |onNext|next video is playing| `{type:"next",seek,index,url}`
 |onPrev|previous video is playing| `{type:"prev",seek,index,url}`
@@ -78,6 +80,135 @@ All event listeners should have a callback function as an argument to handle the
 |onError|Called when an error occurred| `{type:"close",seek,index,url}`
 
 Don't forget to call `FloatingVideo.removeAllListeners()` when component unmount.
+
+## Usage
+For complete usage, see the example project.
+
+    import React from 'react';  
+    import {  
+      StyleSheet,  
+      View,  
+      TouchableOpacity,  
+      ToastAndroid,  
+      Text,  
+    } from 'react-native';  
+    import FloatingVideo from 'rn-floating-video-widget';  
+      
+    export default class App extends React.Component {  
+    
+      constructor(props) {  
+      super(props);  
+      this.state = {  
+      floating: false,  
+      granted: false,  
+     };  
+     // The Data Object
+     this.data = {  
+      video: {  
+      url:  
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',  
+     },  videos: [  
+     {  url:  
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',  
+     }, {  url:  
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',  
+     }, {  url:  
+      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',  
+     }, ],  seek: 10,  
+      index: 0,  
+     }; }  
+     
+     
+      componentDidMount() {  
+    
+      // Add event listeners
+      
+      FloatingVideo.onClose(data => console.log(data));  
+      FloatingVideo.onOpen(data => console.log(data));  
+      FloatingVideo.onPlay(data => console.log(data));  
+      FloatingVideo.onPause(data => console.log(data));  
+      FloatingVideo.onNext(data => console.log(data));  
+      FloatingVideo.onPrev(data => console.log(data));  
+      FloatingVideo.onError(data => console.log(data));  
+     }  
+     
+     
+      enterPipMode() { 
+     
+      FloatingVideo.requestOverlayPermission() 
+     .then(() => {  
+      this.setState({  
+      floating: true,  
+      granted: true,  
+     });  
+     FloatingVideo.open(this.data);  
+     }) .catch(e => {  
+      ToastAndroid.show(  
+      'Please grant draw over other apps permission' + JSON.stringify(e),  
+      800,  
+     ); 
+     }); 
+     }  
+      
+      componentWillUnmount() {  
+      FloatingVideo.removeAllListeners();  
+     }  
+     
+      render() {  
+      const floating = this.state.floating; 
+      
+      return (  
+     <View style={styles.container}>  
+     <TouchableOpacity  
+      style={styles.start}  
+      onPress={() => {  
+      this.enterPipMode();  
+     }}> 
+     <Text  
+      style={{  
+      color: 'white',  
+      fontSize: 20,  
+     }}>  
+     START  
+     </Text>
+     </TouchableOpacity>  
+     </View>  
+     ); }}  
+      
+    const styles = StyleSheet.create({  
+      container: {  
+      flex: 1,  
+ 
+      alignItems: 'center',  
+      paddingTop: 20,  
+      backgroundColor: '#F5FCFF',  
+     },  welcome: {  
+      fontSize: 20,  
+      textAlign: 'center',  
+      margin: 10,  
+     }, 
+     start: {  
+      width: '90%',  
+      alignSelf: 'center',  
+      padding: 15,  
+      backgroundColor: 'red',  
+      justifyContent: 'center',  
+      alignItems: 'center',  
+      elevation: 5,  
+      borderRadius: 5,  
+     },  
+     button: {  
+      alignSelf: 'center',  
+      padding: 5,  
+      borderWidth: 1,  
+      borderColor: 'red',  
+      backgroundColor: 'white',  
+      justifyContent: 'center',  
+      alignItems: 'center',  
+      elevation: 5,  
+      borderRadius: 5,  
+     },});
+
 
 ## Todo List
  - [ ] Improve native code quality
