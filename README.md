@@ -54,7 +54,8 @@ FloatingVideo API has been kept very simple and practical in use.
 |requestOverlayPermission||Ask for `draw over other apps` permission
 
 #### Video Data Object
-The video data object is a single object that can have the following properties:
+The video data object is a single object that can have the following properties
+
 |Name|Type|Required|Description
 |--|--|--|--|
 | video |Object  | yes|A video object must have a `url` property
