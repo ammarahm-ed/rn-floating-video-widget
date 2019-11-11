@@ -6,6 +6,7 @@ React Native Module for **Floating/Popup** video player on Android. From android
 
 <img src="https://github.com/ammarahm-ed/rn-floating-video-widget/blob/master/Screenshots/1.png" width="300" >
 <img src="https://github.com/ammarahm-ed/rn-floating-video-widget/blob/master/Screenshots/2.png" width="300" >
+
 ## Run the Example
 To run the example app clone the project
 
