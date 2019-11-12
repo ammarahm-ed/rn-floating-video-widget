@@ -22,11 +22,11 @@ export function open(data) {
         videos.push(data.video);
         data.videos = videos;
     }
-    if (!data.hasOwnProperty("seek")) {
+    if (!data.hasOwnProperty("seek") || !data.seek ) {
         data.seek = 0;
     }
 
-    if (!data.hasOwnProperty("index")) {
+    if (!data.hasOwnProperty("index") || !data.seek  ) {
         data.index = 0;
     }
     Widget.open(data);
@@ -35,9 +35,11 @@ export function open(data) {
 
 /**
  * Close the floating video player
+ *
  */
 
 export function close() {
+
     Widget.close();
 }
 
