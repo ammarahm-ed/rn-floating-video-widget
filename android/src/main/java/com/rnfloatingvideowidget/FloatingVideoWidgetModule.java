@@ -106,10 +106,6 @@ public class FloatingVideoWidgetModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void requestOverlayPermission(Promise promise) {
         mPromise = promise;
-         /**
-         *  Before android 6.0 Marshmallow you dont need to ask for canDrawOverlays permission,
-         *  but in newer android versions this is mandatory
-         */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this.reactContext)) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.reactContext.getPackageName()));
             this.reactContext.startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION_REQUEST_CODE, null);

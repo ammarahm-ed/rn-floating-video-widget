@@ -14,7 +14,7 @@
 		android:layout_height="180dp"
         android:elevation="30dp"
     >
-    <com.devbrackets.android.exomedia.ui.widget.VideoView
+    <com.rnfloatingvideowidget.IjkVideoView
 		android:id="@+id/videoView"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"

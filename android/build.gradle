@@ -63,7 +63,14 @@ dependencies {
     // https://github.com/facebook/react-native/blob/0.61-stable/template/android/app/build.gradle#L192
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_module
-    implementation 'com.devbrackets.android:exomedia:4.3.0'	
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation 'com.parse.bolts:bolts-tasks:1.4.0'
+    implementation 'com.github.tcking:ijkplayer-java:0.8.8-full'
+    implementation 'com.github.tcking:ijkplayer-armv7a:0.8.8-full'
+    implementation 'com.github.tcking:ijkplayer-arm64:0.8.8-full'
+    implementation 'com.github.tcking:ijkplayer-x86:0.8.8-full'
+    implementation 'com.github.tcking:ijkplayer-x86_64:0.8.8-full'
+
 }
 
 def configureReactNativePom(def pom) {

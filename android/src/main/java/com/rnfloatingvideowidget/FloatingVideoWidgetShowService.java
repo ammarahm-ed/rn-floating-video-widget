@@ -31,53 +31,58 @@ import androidx.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 
-import com.devbrackets.android.exomedia.listener.OnVideoSizeChangedListener;
-import com.devbrackets.android.exomedia.ui.widget.VideoView;
-import com.devbrackets.android.exomedia.listener.OnErrorListener;
+
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.rnfloatingvideowidget.R;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.Random;
-
 import android.graphics.Point;
 
-public class FloatingVideoWidgetShowService extends Service {
+import tv.danmaku.ijk.media.player.IMediaPlayer;
+import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
-
-
-    private Handler timeoutHandler = new Handler();
-    private static ReadableMap playingVideo = null; // The video currently playing
-    private static ReadableArray videoPlaylist = null; // List of videos
-    private static int index = 0; // Index of playing video in videoPlaylist
-    private static ReadableMap initData = null;
-    private GestureDetector gestureDetector;
-    private int videoWidth = 250; // Default width of floating video player
-    private int videoHeight = 180; // Default Height of floating video player
+public class FloatingVideoWidgetShowService extends Service implements IMediaPlayer.OnPreparedListener {
 
     WindowManager windowManager;
     View floatingWindow, floatingView, playerWrapper, overlayView;
-    VideoView videoView;
+    TextView widgetTitle, widgetBody;
+
+
+    IjkVideoView videoView;
+
     ImageButton increaseSize, decreaseSize, playVideo, pauseVideo;
     WindowManager.LayoutParams params;
     ReactContext reactContext = null;
+    private Handler timeoutHandler = new Handler();
+    private static ReadableMap playingVideo = null;
+    private static ReadableArray videoPlaylist = null;
+    private static int index = 0;
+    private static ReadableMap initData = null;
+    private GestureDetector gestureDetector;
+    private int videoWidth = 250;
+    private int videoHeight = 180;
 
+    public FloatingVideoWidgetShowService() {
+    }
 
-    public FloatingVideoWidgetShowService() {}
+    private void openWidget() {
+        floatingView.setVisibility(View.VISIBLE);
+    }
+
+    private void closeWidget() {
+        floatingView.setVisibility(View.GONE);
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
+
         return null;
     }
 
@@ -94,8 +99,8 @@ public class FloatingVideoWidgetShowService extends Service {
                     args.putInt("index", index);
                     args.putInt("seek", (int) seek);
                     args.putString("type", "close");
+
                     sendEvent(reactContext, "onClose", args);
-                    onDestroy();
                     break;
                 }
                 case "ACTION_PLAY": {
@@ -121,22 +126,32 @@ public class FloatingVideoWidgetShowService extends Service {
                     videoPlaylist = data.getArray("videos");
                     index = data.getInt("index");
                     int Seek = data.getInt("seek");
-                    Uri myUri = Uri.parse(playingVideo.getString("url"));
-                    videoView.setVideoURI(myUri);
+                    videoView.setFloatingWindow(floatingWindow);
+
+                    setSrc(playingVideo.getString("videoURL"));
+
                     videoView.seekTo(Seek);
+
                     videoView.start();
                     videoView.setKeepScreenOn(true);
 
-                    WritableMap args = Arguments.createMap();
-                    args.putString("state", "isOpened");
-                    args.putString("url", playingVideo.getString("url"));
-                    sendEvent(reactContext, "onOpen", args);
+
+
                     break;
                 }
             }
         }
         return START_STICKY;
     }
+
+    public void setSrc(final String uriString) {
+        if (uriString == null)
+            return;
+
+
+            videoView.setVideoPath(uriString);
+    }
+
 
     @Override
     public void onCreate() {
@@ -147,7 +162,9 @@ public class FloatingVideoWidgetShowService extends Service {
         reactContext = getReactContext;
         floatingWindow = LayoutInflater.from(this).inflate(R.layout.floating_widget_layout, null);
 
-        // Define the layout flag according to android version.
+        IjkMediaPlayer.loadLibrariesOnce(null);
+        IjkMediaPlayer.native_profileBegin("libijkplayer.so");
+
 
         int LAYOUT_FLAG;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -155,7 +172,6 @@ public class FloatingVideoWidgetShowService extends Service {
         } else {
             LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
         }
-        // Setting layout params for floating video
 
         params = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT, LAYOUT_FLAG,
@@ -167,68 +183,40 @@ public class FloatingVideoWidgetShowService extends Service {
         assert windowManager != null;
         windowManager.addView(floatingWindow, params);
 
-        // Define all the video view and its components
-
         floatingView = floatingWindow.findViewById(R.id.Layout_Expended);
         playerWrapper = floatingWindow.findViewById(R.id.view_wrapper);
         overlayView = floatingWindow.findViewById(R.id.overlay_view);
-        videoView = (VideoView) floatingWindow.findViewById(R.id.videoView);
+        videoView = (IjkVideoView) floatingWindow.findViewById(R.id.videoView);
         increaseSize = (ImageButton) floatingWindow.findViewById(R.id.increase_size);
         decreaseSize = (ImageButton) floatingWindow.findViewById(R.id.decrease_size);
         playVideo = (ImageButton) floatingWindow.findViewById(R.id.app_video_play);
         pauseVideo = (ImageButton) floatingWindow.findViewById(R.id.app_video_pause);
 
+        videoView.setOnPreparedListener(this);
 
-        // Setting the on error Listener
-
-        videoView.setOnErrorListener(new OnErrorListener() {
+        videoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
-            public boolean onError(Exception e) {
+            public boolean onError(IMediaPlayer mp, int what, int extra) {
+
                 long seek = videoView.getCurrentPosition();
+
                 WritableMap args = new Arguments().createMap();
                 args.putInt("index", index);
                 args.putInt("seek", (int) seek);
-                args.putString("url", playingVideo.getString("url"));
+                args.putString("videoURL", playingVideo.getString("videoURL"));
                 args.putString("type", "error");
 
                 sendEvent(reactContext, "onError", args);
 
                 Toast.makeText(reactContext, "An Error occured, please try again", Toast.LENGTH_LONG).show();
                 return false;
-            }
-        });
-
-        // Changes the video size when new video is loaded
-
-        videoView.setOnVideoSizedChangedListener(new OnVideoSizeChangedListener() {
-            @Override
-            public void onVideoSizeChanged(int intrinsicWidth, int intrinsicHeight, float pixelWidthHeightRatio) {
-                final float scale = reactContext.getResources().getDisplayMetrics().density;
-
-                videoWidth = intrinsicWidth;
-                videoHeight = intrinsicHeight;
-
-                RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
-                double aspectRatio = (double) videoWidth / (double) videoHeight;
-
-                if (videoHeight > videoWidth) {
-                    int height = (int) (200 * scale + 0.5f);
-                    double width = height * aspectRatio;
-
-                    relativeLayout.getLayoutParams().width = (int) width;
-                    relativeLayout.getLayoutParams().height = height;
-
-                } else {
-                    int width = (int) (250 * scale + 0.5f);
-                    double height = width / aspectRatio;
-                    relativeLayout.getLayoutParams().width = width;
-                    relativeLayout.getLayoutParams().height = (int) height;
-
-                }
 
 
             }
         });
+
+
+
 
         floatingWindow.findViewById(R.id.app_video_crop).setOnClickListener(new View.OnClickListener() {
 
@@ -241,14 +229,15 @@ public class FloatingVideoWidgetShowService extends Service {
                 WritableMap args = new Arguments().createMap();
                 args.putInt("index", index);
                 args.putInt("seek", (int) seek);
-                args.putString("url", playingVideo.getString("url"));
+                args.putString("videoURL", playingVideo.getString("videoURL"));
                 args.putString("type", "close");
+                videoView.pause();
+                videoView.stopPlayback();
+                videoView.release(true);
                 sendEvent(reactContext, "onClose", args);
                 onDestroy();
             }
         });
-
-
 
         floatingWindow.findViewById(R.id.Layout_Expended).setOnTouchListener(new View.OnTouchListener() {
             int X_Axis, Y_Axis;
@@ -314,6 +303,17 @@ public class FloatingVideoWidgetShowService extends Service {
         });
     }
 
+    @Override
+    public void onPrepared(IMediaPlayer mp) {
+
+        WritableMap args = Arguments.createMap();
+        args.putString("state", "isOpened");
+        args.putInt("audioSessionID", mp.getAudioSessionId());
+        args.putString("videoURL", playingVideo.getString("videoURL"));
+        sendEvent(reactContext, "onOpen", args);
+
+    }
+
     private class SingleTapConfirm extends SimpleOnGestureListener {
 
         @Override
@@ -322,20 +322,20 @@ public class FloatingVideoWidgetShowService extends Service {
         }
     }
 
-
     private void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
     }
 
-
-
     public void increaseWindowSize(View view) {
+        videoHeight = videoView.getVideoHeight();
+        videoWidth = videoView.getVideoWidth();
         final float scale = reactContext.getResources().getDisplayMetrics().density;
         RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
         Display display = windowManager.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int densityX = size.x; // default height width of screen
+
 
         double aspectRatio = (double) videoWidth / (double) videoHeight;
 
@@ -364,18 +364,22 @@ public class FloatingVideoWidgetShowService extends Service {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         videoView.setKeepScreenOn(false);
+        videoView.stopPlayback();
+        videoView.setOnPreparedListener(null);
         stopSelf();
         WritableMap args = new Arguments().createMap();
         args.putInt("index", index);
         args.putInt("seek", (int) seek);
         args.putString("type", "close");
-        args.putString("url", playingVideo.getString("url"));
+        args.putString("videoURL", playingVideo.getString("videoURL"));
 
         sendEvent(reactContext, "onClose", args);
         onDestroy();
     }
 
     public void decreaseWindowSize(View view) {
+        videoHeight = videoView.getVideoHeight();
+        videoWidth = videoView.getVideoWidth();
         final float scale = reactContext.getResources().getDisplayMetrics().density;
         RelativeLayout relativeLayout = (RelativeLayout) floatingWindow.findViewById(R.id.view_wrapper);
 
@@ -410,7 +414,7 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putInt("index", index);
         args.putInt("seek", (int) seek);
         args.putString("type", "paused");
-        args.putString("url", playingVideo.getString("url"));
+        args.putString("videoURL", playingVideo.getString("videoURL"));
         sendEvent(reactContext, "onPause", args);
 
     }
@@ -424,7 +428,7 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putInt("index", index);
         args.putInt("seek", (int) seek);
         args.putString("type", "resume");
-        args.putString("url", playingVideo.getString("url"));
+        args.putString("videoURL", playingVideo.getString("videoURL"));
         sendEvent(reactContext, "onPlay", args);
     }
 
@@ -437,8 +441,9 @@ public class FloatingVideoWidgetShowService extends Service {
 
         ReadableMap video = videoPlaylist.getMap(next);
         playingVideo = video;
-        Uri myUri = Uri.parse(video.getString("url"));
-        videoView.setVideoURI(myUri);
+
+        setSrc(video.getString("videoURL"));
+
         videoView.seekTo(0);
         videoView.start();
         playVideo.setVisibility(ImageButton.GONE);
@@ -447,7 +452,7 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putInt("index", index);
 
         args.putString("type", "next");
-        args.putString("url", playingVideo.getString("url"));
+        args.putString("videoURL", playingVideo.getString("videoURL"));
         sendEvent(reactContext, "onNext", args);
 
     }
@@ -462,8 +467,9 @@ public class FloatingVideoWidgetShowService extends Service {
 
         ReadableMap video = videoPlaylist.getMap(next);
         playingVideo = video;
-        Uri myUri = Uri.parse(video.getString("url"));
-        videoView.setVideoURI(myUri);
+        playingVideo = video;
+
+        setSrc(video.getString("videoURL"));
         videoView.seekTo(0);
         videoView.start();
         playVideo.setVisibility(ImageButton.GONE);
@@ -472,9 +478,11 @@ public class FloatingVideoWidgetShowService extends Service {
         args.putInt("index", index);
 
         args.putString("type", "prev");
-        args.putString("url", playingVideo.getString("url"));
+        args.putString("videoURL", playingVideo.getString("videoURL"));
         sendEvent(reactContext, "onPrev", args);
     }
+
+
 
 
     @Override
@@ -482,10 +490,18 @@ public class FloatingVideoWidgetShowService extends Service {
         super.onDestroy();
         if (floatingWindow != null)
             windowManager.removeView(floatingWindow);
+        if (videoView != null)
+            videoView.setOnPreparedListener(null);
+            videoView.stopPlayback();
+            videoView.release(true);
+
     }
 
     protected ReactNativeHost getReactNativeHost() {
         return ((ReactApplication) getApplication()).getReactNativeHost();
     }
+
+
+
 
 }
